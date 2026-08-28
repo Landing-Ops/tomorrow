@@ -12,7 +12,7 @@
   //    → 새 광고주 랜딩 만들 때 이 3줄(특히 ADVERTISER·THANKYOU_URL)만 그 광고주 것으로 바꾸면 됨.
   var ADVERTISER      = '밝은내일';   // ★ 이 랜딩의 광고주키(landing-db advertisers.광고주키와 일치). 워커가 배정광고주로 저장.
   var WEBAPP2_URL      = 'https://landing.softman007.workers.dev/submit';   // landing 워커 /submit (JSONP)
-  var THANKYOU_URL    = 'https://landing.softman007.workers.dev/result';    // ★ 밝은내일 땡큐. 실제 도메인 정해지면 교체.
+  var THANKYOU_URL    = 'https://landing-ops.github.io/tomorrow/result.html';    // ★ 밝은내일 땡큐(GitHub Pages, 랜딩과 같은 폴더). 커스텀 도메인 씌우면 교체.
   
   /* =====================================================================
    ★ 광고 유입 URL 파라미터 사용법 (매체 × 지역 × 연령)
