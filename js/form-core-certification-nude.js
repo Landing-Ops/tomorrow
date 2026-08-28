@@ -10,9 +10,9 @@
 
   // ★★ 랜딩모델(2026-08-28): landing 워커로 전송. 광고주별 랜딩이라 ADVERTISER를 여기 심음.
 
-  var ADVERTISER      = '밝은내일-프리미엄-상담';   // ★광고주키(landing-db advertisers테이블의 광고주키와 일치). 워커가 배정광고주로 저장.
+  var ADVERTISER      = '밝은내일-프리미엄-진단';   // ★광고주키(landing-db advertisers테이블의 광고주키와 일치). 워커가 배정광고주로 저장.
   var WEBAPP2_URL      = 'https://landing.softman007.workers.dev/submit';   // landing 워커 /submit (JSONP)
-  var THANKYOU_URL    = 'https://landing-ops.github.io/tomorrow/done.html?office=법률사무소 밝은내일';   
+  var THANKYOU_URL    = 'https://landing-ops.github.io/tomorrow/done.html?office=법률사무소 밝은내일';
   // ★ 땡큐페이지 URL을 기본으로 쓰면 done.html +사무소명 파라미터). 프리미엄이면 result.html로.
   
   /* =====================================================================
