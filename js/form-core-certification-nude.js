@@ -437,7 +437,7 @@
     var s = document.createElement('script');
     // ★ 워커에선 웜업 전용 라우트 /ping 사용. (WEBAPP2_URL은 /submit이라, 여기에 ping을 태우면
     //   action 무시하고 submit 로직을 타서 빈 리드가 저장될 수 있음 → 반드시 /ping 으로 분리)
-    s.src = 'https://hopeworkout.softman007.workers.dev/ping?callback=' + cb;
+    s.src = 'https://landing.softman007.workers.dev/ping?callback=' + cb;
     s.onerror = function () { delete window[cb]; };
     document.body.appendChild(s);
   }
@@ -561,18 +561,6 @@
     submitBtn.style.cursor = 'default';
 
     showLoadingOverlay();   // ★ 클릭 즉시 오버레이 표시 (재시도가 일어나도 계속 유지됨)
-
-    /* =====================================================================
-       ★ 제휴사(리플/이정용) 폼 동시 전송 — partner-form.js 가 있을 때만 실행
-       - 반드시 웹앱2 호출(attemptSubmit)보다 먼저 실행해야 함.
-         웹앱2 응답 후 땡큐페이지로 페이지 이동이 일어나면,
-         그 순간 진행 중이던 제휴사 전송이 끊길 수 있기 때문.
-       - partner-form.js를 로드하지 않으면 이 블록은 그냥 건너뜀 (연동 OFF).
-         즉 제휴 연동을 끄고 싶으면 index.html에서 script 태그만 빼면 됨.
-    ===================================================================== */
-    if (typeof window.submitPartnerForm === 'function') {
-      window.submitPartnerForm();
-    }
 
 /* ★ requestId를 전화번호별로 세션에 보관 —
        응답 유실로 수동 재시도할 때 같은 requestId를 재사용해야
