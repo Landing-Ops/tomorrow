@@ -8,19 +8,11 @@
   var form = document.querySelector('[data-form="lead"]');
   if (!form) return;
 
-  /* ---------- 구글폼 매핑 (죽은 코드) ----------
-     ★ 원래도 실제 전송에 안 쓰이던 구글폼 entry 매핑. 워커 이전(2026-08-18)으로
-        구글폼 URL 자체를 제거했으므로 이 매핑도 완전히 무의미. 참고용으로만 남김.
-  // var ENTRY = {
-  //   name:'entry.361593477', phone:'entry.153916989', inco:'entry.1022218715',
-  //   deb:'entry.275184534', comparison:'entry.128646469', impossibility:'entry.223961785',
-  //   cause:'entry.1013271769', calltime:'entry.1297879783', message:'entry.534304633',
-  //   phoneCheck:'entry.826263640', source:'entry.2051749761'
-  // };
-  */
-  // ★ 구글폼(GOOGLE_FORM_URL)은 원래도 죽은 코드였음(실제 전송은 웹앱2로만) → 이전하며 제거
-  var WEBAPP2_URL      = 'https://hopeworkout.softman007.workers.dev/submit';   // 구 GAS 웹앱2 submit → 워커 이전 (2026-08-18). ★JSONP 구조 그대로 — 워커가 callback 지원
-  var THANKYOU_URL    = 'https://hopeworkout.com/result';
+  // ★★ 랜딩모델(2026-08-28): landing 워커로 전송. 광고주별 랜딩이라 ADVERTISER를 여기 심음.
+  //    → 새 광고주 랜딩 만들 때 이 3줄(특히 ADVERTISER·THANKYOU_URL)만 그 광고주 것으로 바꾸면 됨.
+  var ADVERTISER      = '밝은내일';   // ★ 이 랜딩의 광고주키(landing-db advertisers.광고주키와 일치). 워커가 배정광고주로 저장.
+  var WEBAPP2_URL      = 'https://landing.softman007.workers.dev/submit';   // landing 워커 /submit (JSONP)
+  var THANKYOU_URL    = 'https://landing.softman007.workers.dev/result';    // ★ 밝은내일 땡큐. 실제 도메인 정해지면 교체.
   
   /* =====================================================================
    ★ 광고 유입 URL 파라미터 사용법 (매체 × 지역 × 연령)
@@ -93,7 +85,7 @@
 
             
   /* ---------- 핸드폰 인증 OTP 설정 (구글앱스 웹앱 API)---------- */
-  var OTP_API_URL = 'https://hopeworkout.softman007.workers.dev/otp';   // 구 GAS 웹앱1(OTP) → 워커 이전 (2026-08-18). ★현재 OTP 블록 전체 주석=OFF 상태. 켤 때 워커 KV·시크릿 세팅 필요
+  var OTP_API_URL = 'https://landing.softman007.workers.dev/otp';   // landing 워커 /otp. ★현재 OTP 블록 전체 주석=OFF. 프리미엄(현암) 켤 때 워커 KV·시크릿 세팅 필요
   var isPhoneVerified = false;  // 인증 완료 여부
 
   /* ---------- 필드 수집 (data-field) ---------- */
@@ -466,6 +458,7 @@
       deb: (f.deb.value || '').trim(),                            // ★ 이제 만원 단위 숫자
       calltime: (f.calltime.value || '').trim(),
       source: SOURCE,
+      adv: ADVERTISER,        // ★ 랜딩모델: 이 랜딩의 광고주키 → 워커가 배정광고주로 저장
       requestId: requestId   // ★ 이번 제출(1차+재시도) 전체가 공유하는 고유 ID — 서버가 재시도 감지용으로 사용
     };
     return new URLSearchParams(params);
