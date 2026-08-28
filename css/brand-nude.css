@@ -1,0 +1,75 @@
+/* =====================================================================
+   brand.css  —  디자인 토큰(값)만. 색 · 폰트 · 그라디언트.
+   원칙: 토큰은 적게, 컴포넌트는 많이. 토큰 1개만 바꾸면 전체 스킨이 바뀐다.
+   (개인회생 랜딩 독립본 — 기존 정책자금 styles.css의 색을 nude 토큰 구조로 이식)
+===================================================================== */
+
+/* ---------- [1] PALETTE — 원재료 색상 ---------- */
+:root{
+  /* Primary 계열 (구 --brand / --accent / --accent-2) */
+  --primary:        #1f5fae;            /* 메인 파랑   (구 --brand) */
+  --primary-bright: #0b5bd3;            /* 버튼 파랑   (구 --accent) */
+  --primary-strong: #0e3b64;            /* 진한 파랑   (폼 활성 버튼 등) */
+  --primary-soft:   rgba(31,95,174,.12);
+  --primary-bg:     #eaf2ff;            /* 옅은 파랑 배경 (구 --bg-start) */
+  --primary-border: #bcd5ff;
+  --primary-text:   #274c9b;            /* 링크/배지 텍스트 (구 --chip-ink) */
+  --primary-after:  #5da1ff;            /* 그래프 after 막대 끝색 */
+
+  /* Neutral scale (쿨 그레이) */
+  --neutral-900:#0b2540;                /* 본문 진한 (구 --ink) */
+  --neutral-800:#233043;
+  --neutral-700:#33415a;
+  --neutral-600:#5d6b7a;                /* 보조 텍스트 (구 --muted) */
+  --neutral-500:#66768a;
+  --neutral-400:#9aa7b6;
+  --neutral-300:#cbd5e1;
+  --neutral-200:#e6ecf5;
+  --neutral-100:#eef3fa;
+  --neutral-50: #f3f7ff;
+  --white:#ffffff;
+
+  /*세컨더리, 악센트 추가 (번호인증용)*/
+  --secondary: hsl(231 65% 46%);
+  --accent: hsl(43 82% 50%);
+}
+
+/* ---------- [2] SEMANTIC — 의미 토큰 ---------- */
+:root{
+  --page-bg:        var(--white);
+  --section-bg:     var(--white);
+  --section-alt-bg: var(--primary-bg);  /* 교대 섹션 = 옅은 파랑 */
+  --card-bg:        var(--white);
+
+  --border-subtle:  var(--neutral-100);
+  --border-default: var(--neutral-200);
+  --border-strong:  var(--neutral-300);
+
+  --ring: 0 0 0 4px rgba(11,91,211,.15);
+}
+
+/* ---------- [3] ROLE TOKENS — 역할 토큰 (data-color-pattern 으로 교체 가능) ---------- */
+:root[data-color-pattern="1"]{
+  /* CTA */
+  --color-cta-main:        var(--primary-bright);
+  --color-cta-main-text:   #fff;
+  --color-cta-main-strong: var(--primary-strong);  /* 폼 검증 통과 시 버튼 */
+  --color-cta-disabled:    #595959;                /* 폼 비활성 (기존 동작 그대로) */
+
+  /* 텍스트 강조 */
+  --color-highlight-text:        var(--primary);
+  --color-highlight-strong-text: var(--primary-bright);
+  --color-highlight-bg:          var(--primary-soft);
+
+  /* 폼 포커스/에러 */
+  --color-form-focus-border: var(--primary-border);
+  --color-form-error:        #c53030;
+}
+
+/* ---------- [C] 업종 폰트 프리셋 (data-industry) ----------
+   법률/회생 = 신뢰·안정 모던고딕. 기존 페이지 폰트(Noto Sans KR) 유지. */
+body[data-industry="legal"],
+body[data-industry="finance"]{
+  --font-heading: 'Noto Sans KR', system-ui, -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  --font-body:    'Noto Sans KR', system-ui, -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+}
