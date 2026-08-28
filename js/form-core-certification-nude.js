@@ -12,7 +12,7 @@
   //    → 새 광고주 랜딩 만들 때 이 3줄(특히 ADVERTISER·THANKYOU_URL)만 그 광고주 것으로 바꾸면 됨.
   var ADVERTISER      = '밝은내일';   // ★ 이 랜딩의 광고주키(landing-db advertisers.광고주키와 일치). 워커가 배정광고주로 저장.
   var WEBAPP2_URL      = 'https://landing.softman007.workers.dev/submit';   // landing 워커 /submit (JSONP)
-  var THANKYOU_URL    = 'https://landing-ops.github.io/tomorrow/result.html';    // ★ 밝은내일 땡큐(GitHub Pages, 랜딩과 같은 폴더). 커스텀 도메인 씌우면 교체.
+  var THANKYOU_URL    = 'https://landing-ops.github.io/tomorrow/done.html?office=법률사무소 밝은내일';    // ★ 기본등급 완료화면(공용 done.html + office파라미터). 프리미엄이면 result.html로.
   
   /* =====================================================================
    ★ 광고 유입 URL 파라미터 사용법 (매체 × 지역 × 연령)
@@ -518,7 +518,10 @@
         alert('신청이 완료되었습니다.');
         try { sessionStorage.setItem('lead_name', (f.name.value || '').trim()); } catch (e) {}
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        window.location.href = THANKYOU_URL + '?uid=' + data.uid;
+        // ★ THANKYOU_URL에 이미 파라미터(?office= 등)가 있으면 &로, 없으면 ?로 uid 연결.
+        //   기본등급(done.html?office=..)·프리미엄(result.html) 둘 다 깨지지 않게 자동 분기.
+        var sep = (THANKYOU_URL.indexOf('?') === -1) ? '?' : '&';
+        window.location.href = THANKYOU_URL + sep + 'uid=' + data.uid;
 
       } else if (data && data.reason === 'duplicate') {
         alert('이미 접수된 번호입니다. 신청이 불가합니다.');

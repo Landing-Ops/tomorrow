@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>신청 완료</title>
+
+  <link rel="icon" href="./img/favicon_32x32.png" />
+  <link rel="apple-touch-icon" href="./img/favicon_32x32.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+  <!-- =====================================================================
+       done.html — 기본(5만원)등급 공용 완료화면
+       ---------------------------------------------------------------------
+       ★ 이 파일 하나를 전 기본등급 광고주가 공유한다(광고주별로 복사·수정 X).
+       ★ 사무소명은 URL 파라미터 ?office=... 로 받아 자동 표시.
+         → form-core의 THANKYOU_URL을 '.../done.html?office=밝은내일' 로 두면 됨.
+         → 새 기본등급 광고주는 이 파일 손 안 대고 office 값만 바꿔 재사용.
+       ★ 프리미엄(8만원)은 이 파일이 아니라 result.html(후기·카운트다운·트래킹)로 감.
+       ★ 자체완결형: 외부 CSS(brand/common 등) 없이도 단독으로 뜬다.
+         (어느 광고주 폴더에 넣어도 작동하도록 스타일을 인라인으로 둠)
+       ===================================================================== -->
+  <style>
+    :root{
+      --bg:#0f172a; --card:#111c33; --line:rgba(255,255,255,.08);
+      --text:#f8fafc; --muted:#94a3b8; --accent:#22c55e; --accent-soft:rgba(34,197,94,.12);
+    }
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    html,body{ height:100%; }
+    body{
+      font-family:'Noto Sans KR',system-ui,-apple-system,sans-serif;
+      background:
+        radial-gradient(1200px 600px at 50% -10%, rgba(34,197,94,.10), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      min-height:100dvh;
+      display:flex; align-items:center; justify-content:center;
+      padding:24px;
+      -webkit-font-smoothing:antialiased;
+    }
+    .done{
+      width:100%; max-width:440px;
+      background:var(--card);
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:clamp(28px,7vw,44px) clamp(22px,6vw,34px);
+      text-align:center;
+      box-shadow:0 24px 60px rgba(0,0,0,.35);
+    }
+    .done__check{
+      width:76px; height:76px; margin:0 auto 22px;
+      border-radius:50%;
+      background:var(--accent-soft);
+      display:flex; align-items:center; justify-content:center;
+    }
+    .done__check svg{ width:38px; height:38px; stroke:var(--accent); }
+    .done__title{
+      font-size:clamp(22px,6vw,27px); font-weight:900; line-height:1.35;
+      letter-spacing:-.02em; margin-bottom:14px;
+    }
+    .done__office{ color:var(--accent); }
+    .done__desc{
+      font-size:clamp(14px,3.8vw,16px); line-height:1.75; color:var(--muted);
+      word-break:keep-all; margin-bottom:26px;
+    }
+    .done__desc strong{ color:var(--text); font-weight:700; }
+    .done__note{
+      background:var(--accent-soft);
+      border:1px solid rgba(34,197,94,.25);
+      border-radius:14px;
+      padding:15px 18px;
+      font-size:clamp(13px,3.6vw,14.5px); line-height:1.7;
+      color:#d1fadf; word-break:keep-all;
+    }
+    .done__note b{ color:#fff; }
+  </style>
+</head>
+<body>
+  <main class="done" role="main">
+    <div class="done__check" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6 9 17l-5-5" />
+      </svg>
+    </div>
+
+    <h1 class="done__title">
+      <span data-name-slot>고객</span>님,<br />
+      신청이 완료되었습니다
+    </h1>
+
+    <p class="done__desc">
+      <strong class="done__office" data-office-slot>담당 사무소</strong>에서<br />
+      채무 탕감을 위한 <strong>무료 법률상담</strong>을 위해<br />
+      곧 연락드릴 예정입니다.
+    </p>
+
+    <div class="done__note">
+      📞 <b>3회 이상 부재 시</b> 상담이 어려울 수 있으니<br />
+      담당자의 전화를 꼭 받아주세요.
+    </div>
+  </main>
+
+  <!-- =====================================================================
+       완료화면 스크립트 — URL 파라미터 읽어 사무소명·이름 표시
+       · office : 사무소명 (form-core THANKYOU_URL에 ?office=... 로 심음)
+       · uid    : lookup으로 이름 조회(선택). 실패해도 '고객'으로 안전 표시.
+       ★ 카운트다운·후기·트래킹 없음(그건 프리미엄 result.html 전용).
+       ===================================================================== -->
+  <script>
+  (function () {
+    'use strict';
+    var LOOKUP_URL = 'https://landing.softman007.workers.dev/lookup';
+
+    var params = new URLSearchParams(window.location.search);
+    var office = (params.get('office') || '').trim();
+    var uid    = (params.get('uid') || '').trim();
+
+    /* 사무소명 표시 (없으면 문구 자연스럽게 폴백) */
+    var officeEl = document.querySelector('[data-office-slot]');
+    if (officeEl) officeEl.textContent = office || '담당 법률사무소';
+
+    /* 이름 표시: uid 있으면 서버 조회(JSONP), 실패/없음이면 '고객' 유지 */
+    if (!uid) return;
+    var cb = 'doneLookupCb_' + Date.now();
+    var s = document.createElement('script');
+    var settled = false;
+
+    function cleanup() {
+      if (s.parentNode) s.parentNode.removeChild(s);
+      try { delete window[cb]; } catch (e) { window[cb] = undefined; }
+    }
+    var t = setTimeout(function () { if (!settled) { settled = true; cleanup(); } }, 8000);
+
+    window[cb] = function (data) {
+      if (settled) return; settled = true;
+      clearTimeout(t); cleanup();
+      if (data && data.ok && data.name) {
+        document.querySelectorAll('[data-name-slot]').forEach(function (el) {
+          el.textContent = data.name;
+        });
+      }
+    };
+    s.src = LOOKUP_URL + '?action=lookup&uid=' + encodeURIComponent(uid) + '&callback=' + cb;
+    s.onerror = function () { if (!settled) { settled = true; clearTimeout(t); cleanup(); } };
+    document.body.appendChild(s);
+  })();
+  </script>
+</body>
+</html>
