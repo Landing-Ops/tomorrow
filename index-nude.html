@@ -128,7 +128,7 @@
         + region·marital·dependents
      ★ 거절조건·계산 없음. 6스텝 값 모아 기존 submit 버튼으로 → 땡큐.
      ===================================================================== -->
-<section class="section leadform" id="contact" aria-labelledby="leadform-title" data-section="lead-form" >
+<section class="section leadform" id="contact" aria-labelledby="leadform-title" data-section="lead-form-top" >
   <div class="leadform__bg" aria-hidden="true"></div>
   <div class="leadform__wrap">
 
@@ -166,7 +166,7 @@
               <li>기각시 <b>100%</b> 전액 환불</li>
             </ul>
             <button type="button" class="wz__start" data-wz-start>10초 신청하기</button>
-            <p class="wz__intro-foot">오늘 <strong id="today-count">0</strong>명이 신청했어요</p>
+            <p class="wz__intro-foot">오늘 <strong id="today-count" class="js-today-count">0</strong>명이 신청했어요</p>
           </div>
 
           <!-- ===== 진행 바(스텝 진입 후 노출) ===== -->
@@ -314,7 +314,7 @@
 </section>
 
 <!-- ============ 섹션3 · 성공사례 ============ -->
-<section class="section testimonials" id="testimonial" aria-label="성공 사례">
+<section class="section testimonials" id="testimonial" aria-label="성공 사례" data-section="testimonials">
   <div class="section__head">
     <h1 class="section__title">법률사무소 밝은내일<br>실제 개인회생 탕감사례</h1>
     <!-- <p class="section__desc">채무의 덫에서 벗어난 분들의 <br class="block min-[981px]:hidden">이야기를 확인해보세요</p> -->
@@ -337,7 +337,7 @@
                 <div class="ts__copyHead">
                   <div class="ts__headline" aria-label="1번 김광연님">
                     <span class="chip">직장인</span>
-                    <strong>의뢰인 박XX님 (서울)</strong>
+                    <strong>의뢰인 박XX님</strong>
                   </div>
                   <div class="ts__meta">
                     <span>총 채무액 | 89,801,880원</span>
@@ -537,7 +537,7 @@
 
 <!-- ============ 섹션4~6 · 서비스 소개+대상자+CTA  (이미지 삽입) ============ -->
   <section>
-    <div class="mx-auto w-[min(1000px,92vw)] flex flex-col items-center pt-7 pb-14">
+    <div class="mx-auto w-[min(1000px,92vw)] flex flex-col items-center pt-7 pb-4">
       <img src="./img/section3.png" data-section="section3"/>
       <img src="./img/section4.png" data-section="section4"/>
       <img src="./img/cta.png" data-section="cta"/>
@@ -552,7 +552,7 @@
         + region·marital·dependents
      ★ 거절조건·계산 없음. 6스텝 값 모아 기존 submit 버튼으로 → 땡큐.
      ===================================================================== -->
-<section class="section leadform" id="contact" aria-labelledby="leadform-title" data-section="lead-form" >
+<section class="section leadform" id="contact-2" aria-labelledby="leadform-title-2" data-section="lead-form-bottom" >
   <div class="leadform__bg" aria-hidden="true"></div>
   <div class="leadform__wrap">
 
@@ -590,7 +590,7 @@
               <li>기각시 <b>100%</b> 전액 환불</li>
             </ul>
             <button type="button" class="wz__start" data-wz-start>10초 신청하기</button>
-            <p class="wz__intro-foot">오늘 <strong id="today-count">0</strong>명이 신청했어요</p>
+            <p class="wz__intro-foot">오늘 <strong id="today-count-2" class="js-today-count">0</strong>명이 신청했어요</p>
           </div>
 
           <!-- ===== 진행 바(스텝 진입 후 노출) ===== -->
@@ -680,11 +680,11 @@
               <!-- 스텝 6 · 이름·연락처·통화시간 + 제출 -->
               <div class="wz__slide" data-wz-step="3">
                 <h3 class="wz__q">안내 받으실<br>연락처를 남겨주세요.</h3>
-                <p class="wz__notice"><b>법률사무소 밝은내일</b>의 도산 전문가가 탕감률을 더 높일수 있는 추가 감면 제도와 최대 예상 탕감액을 전화 상담으로 안내해드립니다.</p>
+                <p class="wz__notice"><b>법률사무소 밝은내일</b>의 도산 전문가가 탕감률을 높일수 있는 추가 감면 제도와 최대 예상 탕감액을 전화 상담으로 안내해드립니다.</p>
 
                 <div class="wz__field">
-                  <label class="wz__flabel" for="lf-name">이름</label>
-                  <input id="lf-name" data-field="name" class="wz__finput" type="text" placeholder="이름" maxlength="4" autocomplete="name">
+                  <label class="wz__flabel" for="lf-name-2">이름</label>
+                  <input id="lf-name-2" data-field="name" class="wz__finput" type="text" placeholder="이름" maxlength="4" autocomplete="name">
                 </div>
 
                 <div class="wz__field">
@@ -699,8 +699,8 @@
                 </div>
 
                 <div class="wz__field">
-                  <label class="wz__flabel" for="calltime">통화가능 시간</label>
-                  <select id="calltime" data-field="calltime" class="wz__fselect">
+                  <label class="wz__flabel" for="calltime-2">통화가능 시간</label>
+                  <select id="calltime-2" data-field="calltime" class="wz__fselect">
                     <option value="" selected disabled>통화가능 시간을 선택해주세요</option>
                     <option>오전 10~11시</option>
                     <option>오전 11시~12시</option>
@@ -714,8 +714,8 @@
                 </div>
 
                 <div class="wz__agree">
-                  <label class="wz__check" for="lf-agree">
-                    <input id="lf-agree" data-field="agree" type="checkbox" checked>
+                  <label class="wz__check" for="lf-agree-2">
+                    <input id="lf-agree-2" data-field="agree" type="checkbox" checked>
                     <span>개인정보처리방침에 동의합니다.</span>
                   </label>
                   <button type="button" class="wz__policy" data-evt="open_privacy">[자세히 보기]</button>

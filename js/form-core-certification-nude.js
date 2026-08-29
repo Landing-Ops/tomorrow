@@ -5,8 +5,13 @@
 (function () {
   'use strict';
 
-  var form = document.querySelector('[data-form="lead"]');
-  if (!form) return;
+  // ★ 폼이 페이지에 여러 개(섹션2·섹션7) 있어도 각각 독립 초기화.
+  //   각 폼은 자기 클로저(변수·상태)를 따로 가져 서로 간섭 없음.
+  var forms = document.querySelectorAll('[data-form="lead"]');
+  if (!forms.length) return;
+  forms.forEach(function (form) { initLeadForm(form); });
+
+  function initLeadForm(form) {
 
   // ★★ 랜딩모델(2026-08-28): landing 워커로 전송. 광고주별 랜딩이라 ADVERTISER를 여기 심음.
 
@@ -579,4 +584,5 @@
     }
     attemptSubmit(1, requestId);
   });
+  } // end initLeadForm
 })();

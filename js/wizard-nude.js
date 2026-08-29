@@ -11,8 +11,12 @@
 (function () {
   'use strict';
 
-  var form = document.querySelector('.wz[data-form="lead"]');
-  if (!form) return;
+  // ★ 폼 여러 개(섹션2·섹션7) 각각 독립 초기화
+  var forms = document.querySelectorAll('.wz[data-form="lead"]');
+  if (!forms.length) return;
+  forms.forEach(function (form) { initWizard(form); });
+
+  function initWizard(form) {
 
   var intro    = form.querySelector('[data-wz-intro]');
   var startBtn = form.querySelector('[data-wz-start]');
@@ -146,4 +150,5 @@
     clearTimeout(rHold);
     rHold = setTimeout(lockHeight, 150);
   });
+  } // end initWizard
 })();

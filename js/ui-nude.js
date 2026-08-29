@@ -73,13 +73,15 @@
     nums.forEach(function (n) { io.observe(n); });
   }
 
-  /* ---------- 섹션 6 입력폼. 투데이 신청자 (#today-count, 날짜 시드 고정난수 25~60) ---------- */
-  var todayEl = document.getElementById('today-count');
-  if (todayEl) {
+  /* ---------- 입력폼 투데이 신청자 (.js-today-count, 날짜 시드 고정난수 25~60) ---------- */
+  /* ★ 폼이 여러 개(섹션2·섹션7)여도 전부 같은 숫자 표시 */
+  var todayEls = document.querySelectorAll('.js-today-count');
+  if (todayEls.length) {
     var today = new Date().toISOString().slice(0, 10);
     var seed = 0;
     for (var i = 0; i < today.length; i++) seed += today.charCodeAt(i);
     var min = 25, max = 60;
-    todayEl.textContent = (seed % (max - min + 1)) + min;
+    var todayVal = (seed % (max - min + 1)) + min;
+    todayEls.forEach(function (el) { el.textContent = todayVal; });
   }
 })();
