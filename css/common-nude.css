@@ -235,9 +235,11 @@ body.is-modal-open{ overflow:hidden; }     /* 모달 열릴 때 본문 스크롤
 
 /* 모바일: 사이즈만 미세 조정 (구조는 PC와 동일) */
 @media (max-width:980px){
-  .ts__imgs{ --ts-img-h:clamp(200px,40vw,300px); gap:12px; }
-  .ts__img{ border-radius:14px; }
-  .ts__quote{ padding: 16px 18px; font-size: 16px; } 
+  /* 모바일: 좌우 2칸 → 상하 1칸, 이미지 원본 비율대로 크게(안 잘림) */
+  .ts__imgs{ grid-template-columns:1fr; gap:14px; }
+  .ts__imgWrap{ height:auto; }
+  .ts__img{ height:auto; object-fit:contain; border-radius:14px; }
+  .ts__quote{ padding: 16px 18px; font-size: 16px; }
 }
 
 @media (max-width: 640px) {
