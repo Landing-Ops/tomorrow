@@ -396,7 +396,7 @@
     // if (v.message.length < 2) { f.message.classList.add('is-invalid'); return { ok: false, msg: '문의사항을 입력하세요.' }; }
     if (!f.agree.checked) { f.agree.classList.add('is-invalid'); return { ok: false, msg: '개인정보 동의를 해주세요.' }; }
 
-    return { ok: true, msg: '최대 예상탕감액 안내받기' };
+    return { ok: true, msg: '예상탕감액 안내받기' };
   }
 
   /* =====================================================================
@@ -406,7 +406,7 @@
     var r = validate();
     if (r.ok) {
       submitBtn.disabled = false;
-      submitBtn.textContent = '최대 예상탕감액 안내받기';
+      submitBtn.textContent = '예상탕감액 안내받기';
       submitBtn.style.background = 'var(--color-cta-main-strong)';
       submitBtn.style.cursor = 'pointer';
     } else {
