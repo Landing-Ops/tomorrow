@@ -151,9 +151,11 @@ body.is-modal-open{ overflow:hidden; }     /* 모달 열릴 때 본문 스크롤
    섹션 2 · 후기 캐러셀 (.testimonials)
    복합 위젯 → 레이아웃을 컴포넌트로 묶어 CSS 관리(JS가 track flex 에 의존).
 ===================================================================== */
-.section.testimonials{ padding-block:clamp(48px,6vw,88px); background:var(--section-alt-bg); }
+.section.testimonials{ padding-block:clamp(48px,6vw,88px); background:transparent; }
+/* ★ A안: 배경을 1000px inner에만 → 좌우는 흰 여백(이미지 섹션과 통일) */
+.section.testimonials .testimonials__inner{ width:min(1000px,92vw); margin-inline:auto; background:var(--section-alt-bg); border-radius:var(--radius-lg); padding:clamp(32px,4vw,56px) clamp(16px,3vw,32px); }
 .section.testimonials .section__head{ margin-bottom:clamp(28px,3.4vw,48px); }
-.section.testimonials .section__body{ width:min(1000px,92vw); margin-inline:auto; }
+.section.testimonials .section__body{ width:100%; margin-inline:auto; }
 .section.testimonials .section__title{ color:#001d47; font-size:clamp(28px,4.5vw,52px); }
 .section.testimonials .section__desc{ margin-top:10px; color:var(--neutral-600); font-size:clamp(18px,1.8vw,24px); }
 
@@ -469,7 +471,9 @@ body.is-modal-open{ overflow:hidden; }     /* 모달 열릴 때 본문 스크롤
 /* ==================================================================
    섹션 7 · 리드폼 (.leadform)   배경 오버레이는 premium.css
 ===================================================================== */
-.section.leadform{ position:relative; padding-block:clamp(72px,10vw,120px); isolation:isolate; text-align:center; color:#fff; }
+.section.leadform{ position:relative; padding-block:clamp(72px,10vw,120px); isolation:isolate; text-align:center; color:#fff; background:transparent; }
+/* ★ A안: 배경을 1000px 래퍼 안에만 → 좌우는 흰 여백(이미지 섹션과 통일) */
+.section.leadform .leadform__wrap{ position:relative; overflow:hidden; border-radius:var(--radius-lg); padding:clamp(40px,6vw,72px) clamp(20px,4vw,40px); }
 .leadform__wrap{ width:min(1000px,92vw); margin-inline:auto; }
 .leadform__card{ background:#fff; border-radius:var(--radius-lg); margin-inline:auto; box-shadow:var(--shadow-lg); border:1px solid rgba(255,255,255,.08); color:var(--neutral-900); }
 .leadform__count{ margin:0 0 8px; font-size:clamp(20px,1.4vw,24px); opacity:.9; }
