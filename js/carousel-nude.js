@@ -1,12 +1,8 @@
 /* =====================================================================
    carousel.js  —  후기 슬라이더 (Vanilla JS)
-   
-   ★ 이 파일은 두 가지 기능을 합친 코드입니다 ★
-   [A] 슬라이드 자동재생 기능 — 전환, dots, 버튼, 자동재생 타이머, hover/터치 정지
-   [B] 그래프 막대 애니메이션 기능 — 슬라이드 진입 시 막대 높이 차오르는 효과
-   
-   두 기능은 goTo() 함수 안에서만 서로 연결됩니다.
-   (슬라이드가 바뀔 때 → activate() 호출 → 그래프 애니메이션 실행)
+
+   슬라이드 자동재생 — 전환, dots, 버튼, 자동재생 타이머, hover/터치 정지.
+   슬라이드가 바뀔 때 → activate()가 is-active 클래스만 토글.
 ====================================================================== */
 (function () {
   'use strict';
@@ -32,59 +28,11 @@
      — 이 구역만 지우면 그래프 애니메이션이 꺼지고, 슬라이드 기능은 그대로 작동함
   ===================================================================== */
 
-  function usableHeight(chartEl) {
-    var cs = getComputedStyle(chartEl);
-    var pt = parseFloat(cs.paddingTop) || 0;
-    var pb = parseFloat(cs.paddingBottom) || 0;
-    return Math.max(0, chartEl.clientHeight - pt - pb);
-  }
-
-  function setBarsForSlide(slide) {
-    var chart = slide.querySelector('.ts__miniChart');
-    if (!chart) return;
-
-    var useH = usableHeight(chart);
-    var beforeRatio = parseFloat(chart.dataset.before) || 0.90;
-    var afterRatio  = parseFloat(chart.dataset.after)  || 0.20;
-
-    var beforeBar = chart.querySelector('.ts__bar--before');
-    var afterBar  = chart.querySelector('.ts__bar--after');
-
-    if (beforeBar) beforeBar.style.setProperty('--bar-h', '0px');
-    if (afterBar)  afterBar.style.setProperty('--bar-h', '0px');
-
-    requestAnimationFrame(function () {
-      requestAnimationFrame(function () {
-        if (beforeBar) beforeBar.style.setProperty('--bar-h', Math.round(useH * beforeRatio) + 'px');
-        if (afterBar)  afterBar.style.setProperty('--bar-h', Math.round(useH * afterRatio) + 'px');
-      });
-    });
-  }
-
-  function resetBars(slide) {
-    slide.querySelectorAll('.ts__bar').forEach(function (b) {
-      b.style.setProperty('--bar-h', '0px');
-    });
-  }
-
   function activate(i) {
     slides.forEach(function (s, si) {
       s.classList.toggle('is-active', si === i);
-      if (si === i) setBarsForSlide(s);
-      else resetBars(s);
     });
   }
-
-  // 화면 회전/리사이즈 시 현재 슬라이드 그래프 재계산
-  var resizeRaf = 0;
-  function onResize() {
-    cancelAnimationFrame(resizeRaf);
-    resizeRaf = requestAnimationFrame(function () {
-      setBarsForSlide(slides[index]);
-    });
-  }
-  window.addEventListener('resize', onResize);
-  window.addEventListener('orientationchange', onResize);
 
 
   /* =====================================================================
@@ -96,7 +44,7 @@
     index = (i + slides.length) % slides.length;
     track.style.transform = 'translate3d(' + (-index * 100) + '%,0,0)';
     dots.forEach(function (d, di) { d.setAttribute('aria-selected', di === index ? 'true' : 'false'); });
-    activate(index);   // ★ [B] 그래프 애니메이션 트리거 (여기서만 연결됨)
+    activate(index);
   }
   function next() { goTo(index + 1); }
   function prev() { goTo(index - 1); }

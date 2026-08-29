@@ -113,12 +113,12 @@
   <main id="page">
 
 <!-- ============ 랜딩 이미지 삽입 ============ -->
-    <section class="hero" id="hero">
-      <div class="mx-auto w-[min(800px,92vw)] grid items-center grid-cols-1 pt-7 pb-14">
-          <img src="./img/hero002.png" data-section="hero" />
-          <img src="./img/hero002.png" data-section="cta" />
-      </div>
-    </section>
+  <section class="hero" id="hero">
+    <div class="mx-auto w-[min(1000px,92vw)] flex flex-col items-center pt-7 pb-14">
+      <img src="./img/hero001.png" data-section="hero"/>
+      <!-- <img src="./img/hero002.png" data-section="cta"/> -->
+    </div>
+  </section>
 
 
 <!-- =====================================================================
@@ -315,10 +315,10 @@
 </section>
 
 
-<!-- ============ 섹션 2 · 성공사례 ============ -->
+<!-- ============ 섹션3 · 성공사례 ============ -->
 <section class="section testimonials" id="testimonial" aria-label="성공 사례">
   <div class="section__head">
-    <h1 class="section__title">예상 탕감액 진단 후<br>월 납입금 줄어든 분들의 이야기</h1>
+    <h1 class="section__title">법률사무소 밝은내일<br>실제 개인회생 탕감사례</h1>
     <!-- <p class="section__desc">채무의 덫에서 벗어난 분들의 <br class="block min-[981px]:hidden">이야기를 확인해보세요</p> -->
   </div>
 
@@ -339,37 +339,33 @@
                 <div class="ts__copyHead">
                   <div class="ts__headline">
                     <span class="chip">직장인</span>
-                    <strong>신청자 김XX님 (서울)</strong>
+                    <strong>신청자 김광연 (서울)</strong>
                   </div>
-                  <!-- <div class="ts__meta">
-                    <span>채무액 | 43,533,853원</span>
-                    <span>탕감액 | 39,586,669원</span>
-                  </div> -->
+                  <div class="ts__meta">
+                    <span>채무액 | 89,801,880원</span>
+                    <span>총 탕감액 | 75,806,946원</span>
+                    <span>월상환액 | 332,247원</span>
+                    <span>탕감률 | 87.8%</span>
+                  </div>
                 </div>
-              <blockquote class="ts__quote">
+              <!-- <blockquote class="ts__quote">
               냉동식품 공장에 다니는데, 재작년 허리디스크로 몇 달 일을 못 하면서 빚이 4천3백만원까지 늘었습니다.
               <br class="block min-[981px]:hidden"><br class="block min-[981px]:hidden">
               통장이 막히거나 회사에 알려질까 봐 걱정했는데, 국민채무조정지원센터를 통해 제 상황에 맞는 정보를 얻어 회생을 진행했고, 지금은 <strong>매달 약 11만원 정도 갚으며</strong> 딸 앞에서 웃을 수 있게 됐습니다.
               <br class="block min-[981px]:hidden"><br class="block min-[981px]:hidden">
               한숨 대신, <strong>이제는 웃는 얼굴을 보여줄 수 있어 다행입니다.</strong>
-              </blockquote>
+              </blockquote> -->
                 <!-- <button class="ts__more" type="button" aria-expanded="false">자세히 읽기</button> -->
               </div>
               <!-- 오른쪽 큰 박스: 사진 + 그래프(1:1) -->
-              <div class="ts__right">
-                <div class="ts__photoWrap">
-                  <img src="./img/ts_1.png" class="ts__photo">
+              <div class="ts__imgs">
+                <!-- 좌우 이미지 2개 (같은 크기·비율) -->
+                <div class="ts__imgWrap">
+                  <img src="./img/ts_1_left.png" class="ts__img" alt="김광연님 후기 이미지 1">
                 </div>
-                <!--그래프-->
-                <div class="ts__chartWrap">
-                  <div class="ts__miniChart" aria-hidden="true" data-before="0.90" data-after="0.20">
-                    <div class="ts__bar ts__bar--before"><span>탕감 전</span></div>
-                    <div class="ts__bar ts__bar--after"><span>탕감 후</span>
-                      <em class="ts__badge"><strong>탕감율</strong><br><b>90.9%</b></em>
-                    </div>
-                  </div>
+                <div class="ts__imgWrap">
+                  <img src="./img/ts_1_right.png" class="ts__img" alt="김광연님 후기 이미지 2">
                 </div>
-                <!--그래프-->
             </div>
           </li>
           <!-- ========== Slide 2 ========== -->
@@ -382,34 +378,31 @@
                     <span class="chip">일용직</span>
                     <strong>신청자 박XX님 (부산)</strong>
                   </div>
-                  <!-- <div class="ts__meta">
-                    <span>채무액 | 214,991,466원</span>
-                    <span>탕감액 | 204,260,838원</span>
-                  </div> -->
+                  <div class="ts__meta">
+                    <span>채무액 | 89,801,880원</span>
+                    <span>탕감액 | 39,586,669원</span>
+                    <span>월상환액 | 332,247원</span>
+                    <span>탕감률 | 87.8%</span>
+                  </div>
                 </div>
-                <blockquote class="ts__quote">
+                <!-- <blockquote class="ts__quote">
                 막노동과 대리운전을 병행하며 애 둘을 혼자 키우다 빚이 2억을 넘겼습니다.
                 <br class="block min-[981px]:hidden"><br class="block min-[981px]:hidden">
                 국민채무조정지원센터를 통해서 필요한 정보들을 솔직하게 확인할 수 있었고, 제 사정에 맞는 절차로 진행할 수 있었어요. 지금은 <strong>한 달에 약 30만원 갚으며</strong> 애들 앞에서 더 이상 한숨 쉬지 않습니다.
                 <br class="block min-[981px]:hidden"><br class="block min-[981px]:hidden">
                 <strong>사람 사는 것 같은 하루하루가, 이렇게 다시 시작될 수 있더라고요.</strong>
-                </blockquote>
+                </blockquote> -->
                 <!-- <button class="ts__more" type="button" aria-expanded="false">자세히 읽기</button> -->
               </div>
               <!-- 오른쪽 큰 박스: 사진 + 그래프(1:1) -->
-              <div class="ts__right">
-                <div class="ts__photoWrap">
-                   <img src="./img/ts_2.png" class="ts__photo">
+              <div class="ts__imgs">
+                <!-- 좌우 이미지 2개 (같은 크기·비율) -->
+                <div class="ts__imgWrap">
+                  <img src="./img/ts_2_left.png" class="ts__img" alt="후기 이미지 2-1">
                 </div>
-                <!--그래프-->
-                <div class="ts__chartWrap">
-                  <div class="ts__miniChart" aria-hidden="true" data-before="0.90" data-after="0.13">
-                    <div class="ts__bar ts__bar--before"><span>탕감 전</span></div>
-                    <div class="ts__bar ts__bar--after"><span>탕감 후</span>
-                      <em class="ts__badge"><strong>탕감율</strong><br><b>95%</b></em>
-                  </div>
+                <div class="ts__imgWrap">
+                  <img src="./img/ts_2_right.png" class="ts__img" alt="후기 이미지 2-2">
                 </div>
-                <!--그래프-->
             </div>
           </li>
           <!-- ========== Slide 3 ========== -->
@@ -423,35 +416,31 @@
                     <strong>신청자 이XX님 (대구)</strong>
 
                   </div>
-                  <!-- <div class="ts__meta">
-                    <span>채무액 | 198,400,709원</span>
-                    <span>탕감액 | 190,792,253원</span>
-                  </div> -->
+                  <div class="ts__meta">
+                    <span>채무액 | 89,801,880원</span>
+                    <span>탕감액 | 39,586,669원</span>
+                    <span>월상환액 | 332,247원</span>
+                    <span>탕감률 | 87.8%</span>
+                  </div>
                 </div>
-                <blockquote class="ts__quote">
+                <!-- <blockquote class="ts__quote">
                 남편의 사고로 수입이 끊기며 빚이 5천8백만원까지 늘었습니다.
                 <br class="block min-[981px]:hidden"><br class="block min-[981px]:hidden">
                 신용불량 낙인이 평생 갈까 두려웠는데, 국민채무조정지원센터를 통해 요즘은 1년만 성실히 갚으면 신용이 회복될 수 있다는 정보를 알게 됐어요. <strong>지금은 매달 21만원씩 갚으며</strong> 다시 시작할 희망이 생겼습니다.
                 <br class="block min-[981px]:hidden"><br class="block min-[981px]:hidden">
                 <strong>막막했던 마음에, 이제야 조금씩 볕이 듭니다.</strong>
-                </blockquote>
+                </blockquote> -->
                 <!-- <button class="ts__more" type="button" aria-expanded="false">자세히 읽기</button> -->
               </div>
               <!-- 오른쪽 큰 박스: 사진 + 그래프(1:1) -->
-              <div class="ts__right">
-                <div class="ts__photoWrap">
-                   <img src="./img/ts_3.png" class="ts__photo">
+              <div class="ts__imgs">
+                <!-- 좌우 이미지 2개 (같은 크기·비율) -->
+                <div class="ts__imgWrap">
+                  <img src="./img/ts_3_left.png" class="ts__img" alt="후기 이미지 3-1">
                 </div>
-                <!--그래프-->
-                <div class="ts__chartWrap">
-                  <div class="ts__miniChart" aria-hidden="true" data-before="0.90" data-after="0.19">
-                    <div class="ts__bar ts__bar--before"><span>탕감 전</span></div>
-                    <div class="ts__bar ts__bar--after"><span>탕감 후</span>
-                      <em class="ts__badge"><strong>탕감율</strong><br><b>87.1%</b></em>
-                    </div>
-                  </div>
+                <div class="ts__imgWrap">
+                  <img src="./img/ts_3_right.png" class="ts__img" alt="후기 이미지 3-2">
                 </div>
-                <!--그래프-->
             </div>
           </li>
           <!-- ========== Slide 4 ========== -->
@@ -464,35 +453,31 @@
                     <span class="chip">자영업</span>
                     <strong>신청자 정XX님 (경기 수원)</strong>
                   </div>
-                  <!-- <div class="ts__meta">
-                    <span>채무액 | 170,634,099원</span>
-                    <span>탕감액 | 158,567,511원</span>
-                  </div> -->
+                  <div class="ts__meta">
+                    <span>채무액 | 89,801,880원</span>
+                    <span>탕감액 | 39,586,669원</span>
+                    <span>월상환액 | 332,247원</span>
+                    <span>탕감률 | 87.8%</span>
+                  </div>
                 </div>
-                <blockquote class="ts__quote">
+                <!-- <blockquote class="ts__quote">
                 작은 김밥집이 도로공사와 무리한 이전으로 빚이 1억 7천만원까지 늘었습니다.
                 <br class="block min-[981px]:hidden"><br class="block min-[981px]:hidden">
                 재산을 다 뺏길까 겁났는데, 국민채무조정지원센터를 통해 재산을 지키며 빚을 정리하는 제도라는 정보를 확인하고 용기를 냈어요. 지금은 원리금 92%를 덜고 <strong>한 달 34만원씩 갚으며</strong> 살던 집을 지키고 있습니다.
                 <br class="block min-[981px]:hidden"><br class="block min-[981px]:hidden">
                 자책만 하던 제가, <strong>이제야 조금씩 다시 일어서고 있습니다.</strong>
-                </blockquote>
+                </blockquote> -->
                 <!-- <button class="ts__more" type="button" aria-expanded="false">자세히 읽기</button> -->
               </div>
               <!-- 오른쪽 큰 박스: 사진 + 그래프(1:1) -->
-              <div class="ts__right">
-                <div class="ts__photoWrap">
-                   <img src="./img/ts_4.png" class="ts__photo">
+              <div class="ts__imgs">
+                <!-- 좌우 이미지 2개 (같은 크기·비율) -->
+                <div class="ts__imgWrap">
+                  <img src="./img/ts_4_left.png" class="ts__img" alt="후기 이미지 4-1">
                 </div>
-                <!--그래프-->
-                <div class="ts__chartWrap">
-                  <div class="ts__miniChart" aria-hidden="true" data-before="0.90" data-after="0.14">
-                    <div class="ts__bar ts__bar--before"><span>탕감 전</span></div>
-                    <div class="ts__bar ts__bar--after"><span>탕감 후</span>
-                      <em class="ts__badge"><strong>탕감율</strong><br><b>92%</b></em>
-                    </div>
-                  </div>
+                <div class="ts__imgWrap">
+                  <img src="./img/ts_4_right.png" class="ts__img" alt="후기 이미지 4-2">
                 </div>
-                <!--그래프-->
             </div>
           </li>
           <!-- ========== Slide 5 ========== -->
@@ -505,158 +490,31 @@
                     <span class="chip">사업자</span>
                     <strong>신청자 최XX님 (인천)</strong>
                   </div>
-                  <!-- <div class="ts__meta">
-                    <span>채무액 | 421,110,943원</span>
-                    <span>탕감액 | 401,793,415원</span>
-                  </div> -->
+                  <div class="ts__meta">
+                    <span>채무액 | 89,801,880원</span>
+                    <span>탕감액 | 39,586,669원</span>
+                    <span>월상환액 | 332,247원</span>
+                    <span>탕감률 | 87.8%</span>
+                  </div>
                 </div>
-                <blockquote class="ts__quote">
+                <!-- <blockquote class="ts__quote">
                 제조업 공장이 부도나며 빚이 4억 2천만원까지 늘었고, 아버지 병간호까지 겹쳤습니다.
                 <br class="block min-[981px]:hidden"><br class="block min-[981px]:hidden">
                 혼자 하려니 서류가 복잡해 엄두가 안 났는데, 국민채무조정지원센터를 통해 필요한 정보를 정리해 전문가를 찾을 수 있었어요. 지금은 <strong>매달 54만원 정도 갚으며</strong> 원금 95%를 덜었습니다.
                 <br class="block min-[981px]:hidden"><br class="block min-[981px]:hidden">
                 <strong>무너졌던 자리에서, 다시 아버지 곁을 지킬 수 있게 됐습니다.</strong>
-                </blockquote>
+                </blockquote> -->
                 <!-- <button class="ts__more" type="button" aria-expanded="false">자세히 읽기</button> -->
               </div>
               <!-- 오른쪽 큰 박스: 사진 + 그래프(1:1) -->
-              <div class="ts__right">
-                <div class="ts__photoWrap">
-                   <img src="./img/ts_5.png" class="ts__photo">
+              <div class="ts__imgs">
+                <!-- 좌우 이미지 2개 (같은 크기·비율) -->
+                <div class="ts__imgWrap">
+                  <img src="./img/ts_5_left.png" class="ts__img" alt="후기 이미지 5-1">
                 </div>
-                <!--그래프-->
-                <div class="ts__chartWrap">
-                  <div class="ts__miniChart" aria-hidden="true" data-before="0.90" data-after="0.11">
-                    <div class="ts__bar ts__bar--before"><span>탕감 전</span></div>
-                    <div class="ts__bar ts__bar--after"><span>탕감 후</span>
-                      <em class="ts__badge"><strong>탕감율</strong><br><b>95%</b></em>
-                    </div>
-                  </div>
+                <div class="ts__imgWrap">
+                  <img src="./img/ts_5_right.png" class="ts__img" alt="후기 이미지 5-2">
                 </div>
-                <!--그래프-->
-            </div>
-          </li>
-          <!-- ========== Slide 6 ========== -->
-          <li class="ts__slide" aria-label="라벨르OO메틱 (한XX 대표님) 후기" id="slide-6">
-            <div class="ts__grid">
-            <!-- 왼쪽 큰 박스: 위/아래 텍스트 시작선과 폭 통일 -->
-              <div class="ts__copy">
-                <div class="ts__copyHead">
-                  <div class="ts__headline">
-                    <span class="chip">주식·코인</span>
-                    <strong>신청자 한XX님 (광주)</strong>
-                  </div>
-                  <!-- <div class="ts__meta">
-                    <span>채무액 | 426,553,096원</span>
-                    <span>탕감액 | 367,793,788원</span>
-                  </div> -->
-                </div>
-              <blockquote class="ts__quote">
-              주식 투자 실패로 빚이 4억 2천만원까지 불었습니다.
-              <br class="block min-[981px]:hidden"><br class="block min-[981px]:hidden">
-              신청했다가 압류가 들어올까 망설였는데, 국민채무조정지원센터를 통해 오히려 신청하면 추심과 압류가 멈춘다는 정보를 확인하고 결심했습니다. 지금은 <strong>매월 164만원씩 갚으며</strong> 원금 86%를 덜었습니다.
-              <br class="block min-[981px]:hidden"><br class="block min-[981px]:hidden">
-              <strong>짓눌렸던 마음이 가벼워지니, 이제야 웃을 힘이 나네요.</strong>
-              </blockquote>
-                <!-- <button class="ts__more" type="button" aria-expanded="false">자세히 읽기</button> -->
-              </div>
-              <!-- 오른쪽 큰 박스: 사진 + 그래프(1:1) -->
-              <div class="ts__right">
-                <div class="ts__photoWrap">
-                   <img src="./img/ts_6.png" class="ts__photo">
-                </div>
-                <!--그래프-->
-                <div class="ts__chartWrap">
-                  <div class="ts__miniChart" aria-hidden="true" data-before="0.90" data-after="0.18">
-                    <div class="ts__bar ts__bar--before"><span>탕감 전</span></div>
-                    <div class="ts__bar ts__bar--after"><span>탕감 후</span>
-                      <em class="ts__badge"><strong>탕감율</strong><br><b>86%</b></em>
-                    </div>
-                  </div>
-                </div>
-                <!--그래프-->
-            </div>
-          </li>
-          <!-- ========== Slide 7 ========== -->
-          <li class="ts__slide" aria-label="대성OO설 (윤XX 대표님) 후기" id="slide-7">
-            <div class="ts__grid">
-            <!-- 왼쪽 큰 박스: 위/아래 텍스트 시작선과 폭 통일 -->
-              <div class="ts__copy">
-                <div class="ts__copyHead">
-                  <div class="ts__headline">
-                    <span class="chip">도박</span>
-                    <strong>신청자 윤XX님 (제주)</strong>
-                  </div>
-                  <!-- <div class="ts__meta">
-                    <span>채무액 | 84,549,976원</span>
-                    <span>탕감액 | 68,987,908원</span>
-                  </div> -->
-                </div>
-                <blockquote class="ts__quote">
-                도박과 코인으로 빚이 8천4백만원까지 늘었고, 가족이 알까 매일 조마조마했습니다.
-                <br class="block min-[981px]:hidden"><br class="block min-[981px]:hidden">
-                국민채무조정지원센터를 통해 가족·직장에 따로 통보되지 않는다는 정보를 알게 되며 막연한 불안이 사라졌어요. <strong>지금은 43만원씩 갚으며</strong> 원금 82%를 덜었습니다.
-                <br class="block min-[981px]:hidden"><br class="block min-[981px]:hidden">
-                혼자 끙끙 앓던 시간이, <strong>거짓말처럼 가벼워졌습니다.</strong>
-                </blockquote>
-                <!-- <button class="ts__more" type="button" aria-expanded="false">자세히 읽기</button> -->
-              </div>
-              <!-- 오른쪽 큰 박스: 사진 + 그래프(1:1) -->
-              <div class="ts__right">
-                <div class="ts__photoWrap">
-                   <img src="./img/ts_7.png" class="ts__photo">
-                </div>
-                <!--그래프-->
-                <div class="ts__chartWrap">
-                  <div class="ts__miniChart" aria-hidden="true" data-before="0.90" data-after="0.22">
-                    <div class="ts__bar ts__bar--before"><span>탕감 전</span></div>
-                    <div class="ts__bar ts__bar--after"><span>탕감 후</span>
-                      <em class="ts__badge"><strong>탕감율</strong><br><b>82%</b></em>
-                    </div>
-                  </div>
-                </div>
-                <!--그래프-->
-            </div>
-          </li>
-          <!-- ========== Slide 8 ========== --> 
-          <li class="ts__slide" aria-label="" id="slide-8">
-            <div class="ts__grid">
-            <!-- 왼쪽 큰 박스: 위/아래 텍스트 시작선과 폭 통일 -->
-              <div class="ts__copy">
-                <div class="ts__copyHead">
-                  <div class="ts__headline">
-                    <span class="chip">사기피해</span>
-                    <strong>신청자 장XX님 (경기 안산)</strong>
-                  </div>
-                  <!-- <div class="ts__meta">
-                    <span>채무액 | 390,855,017원</span>
-                    <span>탕감액 | 378,047,045원</span>
-                  </div> -->
-                </div>
-                <blockquote class="ts__quote">
-                주식 리딩방 사기로 빚이 3억 9천만원까지 늘어 억울한 나날을 보냈습니다.
-                <br class="block min-[981px]:hidden"><br class="block min-[981px]:hidden">
-                여기서도 또 당할까 걱정했는데, 국민채무조정지원센터를 통해 제게 딱 맞는 정보를 확인하고 형편에 맞는 절차를 알 수 있었어요. 지금은 <strong>63만원 정도 갚으며</strong> 원금 94%를 덜었습니다.
-                <br class="block min-[981px]:hidden"><br class="block min-[981px]:hidden">
-                억울했던 시간을 지나, <strong>이제는 제자리를 찾아가고 있습니다.</strong>
-                </blockquote>
-                <!-- <button class="ts__more" type="button" aria-expanded="false">자세히 읽기</button> -->
-              </div>
-              <!-- 오른쪽 큰 박스: 사진 + 그래프(1:1) -->
-              <div class="ts__right">
-                <div class="ts__photoWrap">
-                   <img src="./img/ts_8.png" class="ts__photo">
-                </div>
-                <!--그래프-->
-                <div class="ts__chartWrap">
-                  <div class="ts__miniChart" aria-hidden="true" data-before="0.90" data-after="0.13">
-                    <div class="ts__bar ts__bar--before"><span>탕감 전</span></div>
-                    <div class="ts__bar ts__bar--after"><span>탕감 후</span>
-                      <em class="ts__badge"><strong>탕감율</strong><br><b>94%</b></em>
-                  </div>
-                </div>
-                <!--그래프-->
-              </div>
             </div>
           </li>
         </ul>

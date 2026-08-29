@@ -154,7 +154,7 @@ body.is-modal-open{ overflow:hidden; }     /* 모달 열릴 때 본문 스크롤
 .section.testimonials{ padding-block:clamp(48px,6vw,88px); background:var(--section-alt-bg); }
 .section.testimonials .section__head{ margin-bottom:clamp(28px,3.4vw,48px); }
 .section.testimonials .section__body{ width:min(900px,92vw); margin-inline:auto; }
-.section.testimonials .section__title{ color:var(--primary); font-size:clamp(28px,4.5vw,52px); }
+.section.testimonials .section__title{ color:#001d47; font-size:clamp(28px,4.5vw,52px); }
 .section.testimonials .section__desc{ margin-top:10px; color:var(--neutral-600); font-size:clamp(18px,1.8vw,24px); }
 
 /* 화살표: 카드 위 절대배치 오버레이 (PC·모바일 공통) */
@@ -191,7 +191,7 @@ body.is-modal-open{ overflow:hidden; }     /* 모달 열릴 때 본문 스크롤
 }
 .ts__copy{ display:contents; }            /* 래퍼 해제 → 자식들이 직접 그리드 아이템으로 */
 .ts__copyHead{ order:1; margin:0; text-align:center; }
-.ts__right{ order:2; }
+.ts__imgs{ order:2; }
 .ts__quote{ order:3; }
 .ts__more{ order:4; }
 
@@ -219,11 +219,10 @@ body.is-modal-open{ overflow:hidden; }     /* 모달 열릴 때 본문 스크롤
   font-weight: 700;
 }
 
-.ts__right{ --ts-chart-h:clamp(240px,40vw,400px); display:grid; grid-template-columns:1fr 1fr; gap:clamp(12px,2vw,18px); align-items:stretch; justify-items:center; }
-.ts__photoWrap{ height:var(--ts-chart-h); display:flex; flex-direction:column; min-width:0; min-height:0; }
-.ts__photo{ width:100%; height:var(--ts-chart-h); object-fit:cover; border-radius:var(--radius-lg); box-shadow:0 8px 18px rgba(11,37,64,.08); display:block; border: 1px solid var(--border-strong);}
+.ts__imgs{ --ts-img-h:clamp(240px,40vw,400px); display:grid; grid-template-columns:1fr 1fr; gap:clamp(12px,2vw,18px); align-items:stretch; justify-items:center; }
+.ts__imgWrap{ height:var(--ts-img-h); display:flex; flex-direction:column; min-width:0; min-height:0; }
+.ts__img{ width:100%; height:var(--ts-img-h); object-fit:cover; border-radius:var(--radius-lg); box-shadow:0 8px 18px rgba(11,37,64,.08); display:block; border: 1px solid var(--border-strong);}
 /* 두 번째 이미지 임시 회색 자리 (실제 이미지 넣으면 그 위로 채워짐) */
-.ts__photoWrap--ph{ background:var(--neutral-200); border-radius:var(--radius-lg); box-shadow:0 8px 18px rgba(11,37,64,.06); }
 
 /* 본문 더보기 버튼: 가운데, 파란 배경/흰 글자 */
 .ts__more{ display:flex; align-items:center; justify-content:center; gap:6px; width:fit-content; margin:8px auto 0; padding:14px 32px; background:var(--color-cta-main); color:#fff; border:0; border-radius:var(--radius-pill); cursor:pointer; font-size:17px; font-weight:700; }
@@ -236,8 +235,8 @@ body.is-modal-open{ overflow:hidden; }     /* 모달 열릴 때 본문 스크롤
 
 /* 모바일: 사이즈만 미세 조정 (구조는 PC와 동일) */
 @media (max-width:980px){
-  .ts__right{ --ts-chart-h:clamp(200px,40vw,300px); gap:12px; }
-  .ts__photo, .ts__photoWrap--ph{ border-radius:14px; }
+  .ts__imgs{ --ts-img-h:clamp(200px,40vw,300px); gap:12px; }
+  .ts__img{ border-radius:14px; }
   .ts__quote{ padding: 16px 18px; font-size: 16px; } 
 }
 
@@ -260,135 +259,6 @@ body.is-modal-open{ overflow:hidden; }     /* 모달 열릴 때 본문 스크롤
   .ts__nav svg {
     width: 22px;
     height: 22px;
-  }
-}
-
-/* =====================================================================
-   섹션2 차트 CSS 추가분 — 섹션2 맨아래에 붙여넣기
-   (기존 .ts__photoWrap 라인 아래에 이어서 추가)
-===================================================================== */
-
-/* 차트 래퍼 */
-.ts__chartWrap{
-  height: var(--ts-chart-h);
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  min-height: 0;
-}
-
-/* 막대 그래프 컨테이너 */
-.ts__miniChart {
-  width: 100%;
-  height: var(--ts-chart-h);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-strong);
-  padding: 18px 18px 36px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 28px;
-  box-shadow: 0 8px 18px rgba(11,37,64,.06);
-  background: repeating-linear-gradient(
-    to top,
-    #ffffff 0px,
-    #ffffff 27px,
-    rgba(2, 28, 59, 0.15) 29px
-  );
-  position: relative;
-}
-
-/* 막대 공통 */
-.ts__bar{
-  position: relative;
-  /* 가로 너비: 최소 40px ~ 최대 100px 사이에서 화면 너비(vw)에 따라 유연하게 변함 */
-  width: clamp(40px, 12vw, 100px); 
-  /* 막대 너비가 줄어들 때 모서리가 너무 둥글면 어색하므로 살짝 깎아줌 */
-  border-radius: 8px 8px 4px 4px; 
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  height: var(--bar-h, 0px);
-  max-height: calc((var(--ts-chart-h, 320px)) - 54px);
-  transition: height .9s cubic-bezier(.22,.61,.36,1);
-  will-change: height;
-}
-
-/* 막대 라벨 */
-.ts__bar span{
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -26px;
-  font-size: 14px;
-  color: var(--neutral-800);
-  line-height: 1;
-  white-space: nowrap;
-}
-
-/* 전/후 막대 색상 */
-.ts__bar--before{ background: var(--neutral-300); }
-.ts__bar--after{
-  background: linear-gradient(to top, var(--primary-bright), var(--primary-after));
-}
-
-/* 배지 */
-.ts__badge {
-  position: absolute;
-  top: -80px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #fff;
-  border: 1px solid var(--border-strong);
-  border-radius: 10px;
-  padding: 6px 10px;
-  font-size: 24px;
-  text-align: center;
-  color: var(--neutral-900);
-  box-shadow: 0 6px 14px rgba(11,37,64,.08);
-  white-space: nowrap;
-}
-.ts__badge b{ color: var(--primary-bright); font-size: 24px; }
-
-/* ---------- 섹션2. 모바일 그래프 박스(max-width: 980px) ---------- */
-@media (max-width: 980px) {
-.ts__chartWrap { 
-  height: var(--ts-chart-h); 
-}
-.ts__miniChart { 
-  padding: 14px 14px 30px; 
-}
-.ts__bar span { 
-  bottom: -22px; 
-  font-size: 13px; 
-}
-.ts__badge { 
-  top: -10px; 
-  right: -8px; 
-  font-size: 10px; 
-}
-.ts__badge b { 
-  font-size: 14px; 
-}
-}
-
-/* ---------- 섹션2. 그래프 뱃지(max-width: 980px) ---------- */
-
-@media (max-width: 980px) {
-  .ts__badge {
-    top: -70px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 18px;
-    padding: 4px 8px;
-    border-radius: 6px;
-    white-space: normal;   /* 줄바꿈 허용 */
-    min-width: 74px;       /* 최소 너비 고정 */
-    line-height: 1.4;
-  }
-  .ts__badge b {
-    font-size: 20px;
-    display: block;        /* % 숫자 별도 줄 */
   }
 }
 
