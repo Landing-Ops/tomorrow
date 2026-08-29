@@ -151,7 +151,7 @@ body.is-modal-open{ overflow:hidden; }     /* 모달 열릴 때 본문 스크롤
    섹션 3 · 후기 캐러셀 (.testimonials)
    복합 위젯 → 레이아웃을 컴포넌트로 묶어 CSS 관리(JS가 track flex 에 의존).
 ===================================================================== */
-.section.testimonials{ padding-block:4px; background:transparent; }
+.section.testimonials{ padding-block:0px; background:transparent; }
 /* ★ A안: 배경을 1000px inner에만 → 좌우는 흰 여백(이미지 섹션과 통일) */
 .section.testimonials .testimonials__inner{ width:min(1000px,92vw); margin-inline:auto; background:var(--section-alt-bg); padding:clamp(32px,4vw,56px) clamp(16px,3vw,32px); }
 .section.testimonials .section__head{ margin-bottom:clamp(28px,3.4vw,48px); }
@@ -269,7 +269,7 @@ body.is-modal-open{ overflow:hidden; }     /* 모달 열릴 때 본문 스크롤
 /* ==================================================================
    섹션 2·7 · 리드폼 (.leadform)   배경 오버레이는 premium.css
 ===================================================================== */
-.section.leadform{ position:relative; padding-block:4px; isolation:isolate; text-align:center; color:#fff; background:transparent; }
+.section.leadform{ position:relative; padding-block:0px; isolation:isolate; text-align:center; color:#fff; background:transparent; }
 /* ★ A안: 배경을 1000px 래퍼 안에만 → 좌우는 흰 여백(이미지 섹션과 통일) */
 .section.leadform .leadform__wrap{ position:relative; overflow:hidden; padding:clamp(28px,5vw,72px) clamp(10px,3vw,40px); }
 .leadform__wrap{ width:min(1000px,92vw); margin-inline:auto; }
