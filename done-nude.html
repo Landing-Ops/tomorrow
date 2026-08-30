@@ -24,6 +24,7 @@
        ★ 색: 밝은내일 랜딩(brand.css) 팔레트에 맞춤 — 흰바탕 + 파랑 + 쿨검정.
          자체완결형(외부 CSS 없이 단독으로 뜸)이라 어느 광고주 폴더에 넣어도 작동.
        ===================================================================== -->
+  
   <style>
     :root{
       /* ★ 밝은내일 랜딩 brand.css 토큰과 동일 계열 */
@@ -85,7 +86,151 @@
     }
     .done__note b{ color:var(--primary-bright); }
   </style>
+
+
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!--  광고 전환 픽셀 모음 (땡큐페이지 </head> 앞에 삽입)                    -->
+<!--                                                                   -->
+<!--  ▣ 이 파일이 하는 일                                                -->
+<!--    유저가 폼 제출 후 이 땡큐페이지에 도착하면,                        -->
+<!--    메타·당근·구글 3개 매체에 "전환(잠재고객 유입)"을 신호로 쏨.       -->
+<!--                                                                   -->
+<!--  ▣ 공통 원칙                                                       -->
+<!--    · 매체별 <script> 블록을 완전히 분리 → 한 곳 터져도 딴 데 영향 X  -->
+<!--    · uid 처리 로직은 함수로 감싸 스코프 격리 (블록끼리 변수 안 섞임) -->
+<!--    · PageView/ViewPage/config = 페이지 도착 추적 → 매번 실행(중복OK)-->
+<!--    · Lead/conversion = 전환 → uid 1개당 딱 1번만 발사              -->
+<!--    · 뒤로가기 반복 방지: 발사하면 localStorage에 "찍었음" 기록,      -->
+<!--      같은 uid로 재진입 시 스킵                                      -->
+<!--    · 저장 키를 매체별로 다르게(접두어) → 서로 간섭 X                 -->
+<!--        메타 : lead_fired_◯◯◯                                      -->
+<!--        당근 : karrot_lead_fired_◯◯◯                               -->
+<!--        구글 : google_lead_◯◯◯                                     -->
+<!--      (키가 같으면 먼저 발사된 매체가 키를 만들어버려                  -->
+<!--       나머지가 "이미 찍힘"으로 오인하고 스킵하는 사고 발생)           -->
+<!--                                                                   -->
+<!--  ▣ ★중요★ 메타·당근 vs 구글의 발사 방식 차이 (삽질로 알아낸 것)      -->
+<!--    · 메타·당근 = "큐(queue)에 쌓았다가 스크립트 로드 후 처리"        -->
+<!--      → 페이지가 uid검증/리디렉션으로 흔들려도 큐가 붙잡아서 안 날아감 -->
+<!--      → 그래서 즉시실행(IIFE)으로 둬도 잘 됨. 절대 건드리지 말 것.     -->
+<!--    · 구글 gtag = "호출 즉시 발사 시도"                             -->
+<!--      → 이 페이지는 uid를 서버 검증(리디렉션)하는 구조라, 즉시 쏘면    -->
+<!--         발사 직전에 페이지가 리셋되며 신호가 휩쓸려 사라졌음         -->
+<!--      → 해결: 구글 conversion만 window 'load'(페이지 완전 로드 후)   -->
+<!--         로 미뤄 발사 → uid검증·리디렉션 다 끝난 뒤 쏘니 안 날아감    -->
+<!--                                                                   -->
+<!--  ▣ 참고 (검증 시 헷갈렸던 것들)                                     -->
+<!--    · Tag Assistant "URL 입력" 디버거는 이 페이지에선 원래 안 됨      -->
+<!--      (봇 접속 차단 + gtag 즉시발사 전제 검수 → 우리 load 방식과 불일치)-->
+<!--      → 실제 전환과 무관하니 판단 근거로 쓰지 말 것                   -->
+<!--    · 애드블록/프라이버시 확장이 doubleclick 요청을 간헐 차단함        -->
+<!--      → 테스트는 애드블록 끄고(또는 시크릿 창) 할 것                  -->
+<!--    · 발사 확인법: F12 → 네트워크 탭 → 필터 "en=conversion"          -->
+<!--      → 830866619 요청이 200/302로 뜨면 정상 발사                   -->
+<!--    · 구글애즈 리포트 "전환 1"은 실제 광고클릭(gclid)+집계시간 필요    -->
+<!--      → 직접 URL 방문 테스트로는 리포트에 안 잡힐 수 있음(정상)       -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+
+<!-- ▼▼▼ [1] 메타(페이스북/인스타) 픽셀 ▼▼▼ -->
+<!-- ※ 발사 방식: 큐 기반 → 타이밍에 강함. IIFE 즉시실행 그대로 둘 것. -->
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+
+fbq('init', '1795948951532455');  // 메타 픽셀 ID
+fbq('track', 'PageView');         // 페이지 도착 → 매번 찍힘 (중복 OK)
+
+// ── 전환(Lead): uid 1개당 딱 1번만 ──
+(function () {
+  var uid = new URLSearchParams(window.location.search).get('uid');  // URL에서 uid 꺼냄
+  if (!uid) return;                                                  // uid 없으면 아무것도 안 함
+  var firedKey = 'lead_fired_' + uid;                                // 이 uid 전용 저장 키
+  if (!localStorage.getItem(firedKey)) {                             // 아직 안 찍혔으면
+    fbq('track', 'Lead');                                            //   → 전환 1번 발사 ★
+    localStorage.setItem(firedKey, '1');                             //   → "찍었음" 기록 (다음엔 스킵)
+  }
+})();
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1795948951532455&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+<!-- ▲▲▲ [1] 메타 끝 ▲▲▲ -->
+
+
+<!-- ▼▼▼ [2] 당근마켓 픽셀 ▼▼▼ -->
+<!-- ※ 발사 방식: 큐 기반 → 타이밍에 강함. IIFE 즉시실행 그대로 둘 것. -->
+<!-- Danggeun Market Code -->
+<script>
+  (function (w, d) {
+    if (w.karrotPixel) return;
+    var k = { stub: true, queue: [] };
+    k.init = function () { k.queue.push(['init', arguments, Date.now()]); };
+    k.track = function () { k.queue.push(['track', arguments, Date.now()]); };
+    w.karrotPixel = k;
+    var s = d.createElement('script');
+    s.async = true;
+    s.src = 'https://karrot-pixel.business.daangn.com/karrot-pixel.js';
+    var f = d.getElementsByTagName('script')[0];
+    f && f.parentNode ? f.parentNode.insertBefore(s, f) : d.head.appendChild(s);
+  })(window, document);
+
+  window.karrotPixel.init('1788068949427591001');  // 당근 픽셀 ID
+  window.karrotPixel.track('ViewPage');            // 페이지 도착 → 매번 찍힘 (중복 OK)
+
+  // ── 전환(Lead): uid 1개당 딱 1번만 ──
+  (function () {
+    var uid = new URLSearchParams(window.location.search).get('uid');   // URL에서 uid 꺼냄
+    if (!uid) return;                                                   // uid 없으면 아무것도 안 함
+    var karrotFiredKey = 'karrot_lead_fired_' + uid;                    // 이 uid 전용 저장 키 (당근 전용 접두어)
+    if (!localStorage.getItem(karrotFiredKey)) {                        // 아직 안 찍혔으면
+      window.karrotPixel.track('Lead');                                 //   → 전환 1번 발사 ★
+      localStorage.setItem(karrotFiredKey, '1');                        //   → "찍었음" 기록 (다음엔 스킵)
+    }
+  })();
+</script>
+<!-- End Danggeun Market Code -->
+<!-- ▲▲▲ [2] 당근 끝 ▲▲▲ -->
+
+
+<!-- ▼▼▼ [3] 구글애즈(유튜브 포함) 전환 태그 ▼▼▼ -->
+<!-- ※ 발사 방식: 즉시발사 → 타이밍에 약함.                              -->
+<!--   이 페이지의 uid검증/리디렉션에 신호가 휩쓸리는 걸 막으려고         -->
+<!--   conversion만 'load'(페이지 완전 로드 후)로 미뤄서 발사함.         -->
+<!--   ★이 load 감싸기를 IIFE로 되돌리면 자동 전환이 다시 안 잡힘★       -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-830866619"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-830866619');  // 페이지 로드 추적, 매번 실행 (중복 OK)
+
+  // ── 전환(conversion): 페이지 완전히 로드된 후 발사 → uid당 1번만 ──
+  window.addEventListener('load', function () {
+    var uid = new URLSearchParams(window.location.search).get('uid');  // URL에서 uid 꺼냄
+    if (!uid) return;                                                  // uid 없으면 발사 안 함
+    var googleFiredKey = 'google_lead_' + uid;                         // 이 uid 전용 저장 키
+    if (!localStorage.getItem(googleFiredKey)) {                       // 아직 안 찍혔으면
+      gtag('event', 'conversion', {'send_to': 'AW-830866619/WHTyCMedueocELuJmIwD'});  // → 전환 발사 ★
+      localStorage.setItem(googleFiredKey, '1');                       //   → "찍었음" 기록
+    }
+  });
+</script>
+<!-- End Google tag (gtag.js) -->
+<!-- ▲▲▲ [3] 구글 끝 ▲▲▲ -->
+
 </head>
+
+
+
 <body>
   <main class="done" role="main">
     <div class="done__check" aria-hidden="true">
