@@ -373,7 +373,7 @@ body.is-modal-open{ overflow:hidden; }     /* 모달 열릴 때 본문 스크롤
   font-size:clamp(17px,3.2vw,23px); font-weight:800; letter-spacing:-.01em;
 }
 .wz__intro-title{
-  font-size:clamp(32px, 7vw, 42px); font-weight:900; line-height:1.35;
+  font-size:clamp(28px, 7vw, 42px); font-weight:900; line-height:1.35;
   color:var(--neutral-900,#0b2540); margin:0 0 clamp(10px,3vw,16px); letter-spacing:-.02em;
 }
 .wz__intro-title b{ color:var(--color-cta-main,#0b5bd3); }
