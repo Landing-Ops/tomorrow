@@ -111,17 +111,6 @@ body.is-modal-open{ overflow:hidden; }     /* 모달 열릴 때 본문 스크롤
   border-radius:var(--radius-lg); box-shadow:0 6px 18px rgba(23,64,136,.08);
 }
 
-/* =====================================================================
-   Footer (스킨)
-===================================================================== */
-.site-footer{ background:#fff; border-top:1px solid var(--border-subtle); color:var(--neutral-900); }
-.footer__logo-ko{ color:var(--neutral-500); font-weight:600; font-size:clamp(20px,1.6vw,24px); }
-.footer__slogan{ color:var(--neutral-600); line-height:1.7; font-size:clamp(14px,1.6vw,17px); }
-.footer__item{ font-size:clamp(12px,1.5vw,14px); color:var(--neutral-700); }
-.footer__item .k{ color:var(--neutral-500); }
-.footer__item .v{ color:var(--neutral-800); }
-.footer__copy{ color:#617089; font-size:12px; }
-.footer__bar{ border-top:1px solid var(--neutral-100); background:linear-gradient(to bottom,#fff,#fafcff); }
 
 /* =====================================================================
    개인정보 모달 (스킨) — 2차에서 HTML/본문 추가. 동작은 ui.js(data-evt)
